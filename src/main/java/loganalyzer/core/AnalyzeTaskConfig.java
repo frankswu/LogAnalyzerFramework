@@ -48,6 +48,16 @@ public class AnalyzeTaskConfig implements Serializable{
 	 */
 	private List<String> analyzelets;
 	
+	/**
+	 * 要分析的log文件名
+	 */
+	private String logFileName;
+	
+	/**
+	 * log文件名生成器
+	 */
+	private String logFileNameGenerator;
+	
 	public AnalyzeTaskConfig() {
 		
 	}
@@ -100,6 +110,22 @@ public class AnalyzeTaskConfig implements Serializable{
 		this.analyzelets = analyzelets;
 	}
 	
+	public String getLogFileName() {
+		return logFileName;
+	}
+
+	public void setLogFileName(String logFileName) {
+		this.logFileName = logFileName;
+	}
+
+	public String getLogFileNameGenerator() {
+		return logFileNameGenerator;
+	}
+
+	public void setLogFileNameGenerator(String logFileNameGenerator) {
+		this.logFileNameGenerator = logFileNameGenerator;
+	}
+
 	public static AnalyzeTaskConfig loadFromConfigFile(String configFile) throws Exception{
 		AnalyzeTaskConfig taskConfig = Yaml.loadType(new File(configFile), AnalyzeTaskConfig.class);
 		return taskConfig;

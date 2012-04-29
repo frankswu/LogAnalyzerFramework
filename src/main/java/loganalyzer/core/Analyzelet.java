@@ -30,5 +30,11 @@ public interface Analyzelet {
 	 * 错误处理逻辑
 	 * @param analyzerContext
 	 */
-	public void onError(AnalyzerContext analyzerContext);
+	public void onError(AnalyzerContext analyzerContext, Throwable t);
+	
+	/**
+	 * 遇到错误是否立即停止
+	 * @return
+	 */
+	public boolean onErrorStop();
 }
