@@ -8,7 +8,6 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.PosixParser;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -82,11 +81,7 @@ public class AnalyseLogTaskLauncher {
 		}
 		//再把配置参数加进去
 		Map<String, String> initParams = config.getInitParams();
-		if(MapUtils.isNotEmpty(initParams)) {
-			for(Map.Entry<String, String> entry : initParams.entrySet()) {
-				analyzerContext.addParam(entry.getKey(), entry.getValue());
-			}
-		}
+		analyzerContext.addParam(initParams);
 		return analyzerContext;
 	}
 }

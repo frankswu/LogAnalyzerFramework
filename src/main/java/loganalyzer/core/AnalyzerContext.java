@@ -23,6 +23,10 @@ public class AnalyzerContext implements Serializable{
 		this.contextMap.put(key, value);
 	}
 	
+	public void addParam(Map<String, ? extends Object> paramMap) {
+		this.contextMap.putAll(contextMap);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public <T> T getParam(String key) {
 		return (T)contextMap.get(key);

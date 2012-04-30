@@ -69,18 +69,18 @@ public class BasicAnalyzerLogTaskExecutor implements AnalyzerLogTaskExecutor{
 		}
 		
 		List<Analyzelet> analyzelets = new ArrayList<>();
+		
 		try{
 			for(String clazzName :analyzeletClazzNames) {
-				@SuppressWarnings("unchecked")
-				Class<? extends Analyzelet> clazz = (Class<? extends Analyzelet>) Class.forName(clazzName);
-				Analyzelet analyzelet = clazz.newInstance();
+				Class<?> clazz =  Class.forName(clazzName);
+				Analyzelet analyzelet = (Analyzelet)clazz.newInstance();
 				analyzelets.add(analyzelet);
 			}
-			
-			return analyzelets;
 		}catch(Throwable e) {
-			throw new LogAnalyzeException("加载Analyzelet出错", e);
+			throw new LogAnalyzeException("Ops!", e);
 		}
+		
+		return analyzelets;
 	}
 	
 	/**
