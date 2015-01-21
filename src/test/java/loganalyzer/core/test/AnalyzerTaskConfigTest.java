@@ -11,7 +11,8 @@ public class AnalyzerTaskConfigTest extends TestCase{
 
 	/** 测试载入配置文件 **/
 	public void testLoad() throws Exception{
-		AnalyzeTaskConfig analyzeTaskConfig = AnalyzeTaskConfig.loadFromConfigFile("/data/test_task.yaml");
+
+		AnalyzeTaskConfig analyzeTaskConfig = AnalyzeTaskConfig.loadFromConfigFile("test_task.yaml");
 		System.out.println(analyzeTaskConfig);
 	}
 }

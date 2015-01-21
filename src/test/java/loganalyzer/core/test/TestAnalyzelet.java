@@ -17,8 +17,16 @@ public class TestAnalyzelet extends BasicAnalyzelet{
 
 	@Override
 	public void doLine(String line, AnalyzerContext analyzerContext) {
-		logger.info("line:" + line);
-		System.out.println(line);
+		String date = line.substring(0,16);
+		String value = line.substring(16,line.length());
+		logger.info("line:" + date);
+		System.out.println(date);
+		System.out.println(value);
+
 	}
 
+	@Override
+	public void end(AnalyzerContext analyzerContext) {
+		super.end(analyzerContext);
+	}
 }
