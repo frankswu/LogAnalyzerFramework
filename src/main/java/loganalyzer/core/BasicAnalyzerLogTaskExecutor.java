@@ -30,21 +30,25 @@ public class BasicAnalyzerLogTaskExecutor implements AnalyzerLogTaskExecutor{
 		return _instance;
 	}
 
+	long pointer =0L;
+
 	@Override
 	public void execute(AnalyzeTaskConfig config, AnalyzerContext context) throws LogAnalyzeException{
 		List<Analyzelet> analyzelets = this.loadAnalyzelet(config);
 		String logFileName = this.getLogFileName(config);
 		String pointerFileName = config.getPointerName();
 		this.doBegin(analyzelets, context);
-		try (RandomAccessFile randAccessFile = new RandomAccessFile(
-                logFileName, "r")) {
-			long pointer = this.getFilePointer(pointerFileName, config.getResetPtrFileTime());
+		try {
+			RandomAccessFile randAccessFile = new RandomAccessFile(logFileName, "r");
+			//long pointer = this.getFilePointer(pointerFileName, config.getResetPtrFileTime());
+
 			randAccessFile.seek(pointer);
 			String line = null;
 			while((line = randAccessFile.readLine()) != null) {
 				this.doLine(analyzelets, context, line);
 				long endPointer = randAccessFile.getFilePointer();
-				this.writePointerFile(pointerFileName, endPointer, config.getResetPtrFileTime());
+				System.out.println(endPointer);
+				//this.writePointerFile(pointerFileName, endPointer, config.getResetPtrFileTime());
 			}
 			this.doEnd(analyzelets, context);
 		} catch (FileNotFoundException e) {
